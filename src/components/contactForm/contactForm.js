@@ -1,7 +1,20 @@
 
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-function ContactForm ({onSubmitData}) {
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'redux/contactsSlice';
+function ContactForm() {
+  const contacts = useSelector(state => state.contacts.contacts);
+  const dispatch = useDispatch();
+  const onSubmitData = data => {
+    let nameArray = [];
+    nameArray = contacts.map(cur => cur.name);
+    if (!nameArray.includes(data.name)) {
+      dispatch(addContact(data));
+    } else {
+      alert(' Контакт вже є у телефонній книзі!!!');
+    }
+  };
   const [name, setName] = useState('')
   const [number, setNumber] = useState('');
 

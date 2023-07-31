@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { setFilter } from 'redux/filterSlice';
 
-function Filter({setFilterToState}) {
+function Filter({ setFilterToState }) {
+  const dispatch = useDispatch();
   const setFilterValue = event => {
     let value = event.currentTarget.value.toUpperCase();
-    setFilterToState(value);
+    dispatch(setFilter(value));
   };
 
   return (
